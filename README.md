@@ -2,7 +2,7 @@
  <img alt="ollama" height="200px" src="https://raw.githubusercontent.com/HawkClaws/oyama/main/icon.jpg">
 </div>
 
-# Ollama
+# Oyama
 
 An improved wrapper for ollama that allows for one-shot launching of local models with URL specification.
 It runs on Linux and GoogleColab.
