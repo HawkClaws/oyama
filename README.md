@@ -10,7 +10,6 @@ It will not work on Windows or Mac...
 
 # How to use
 
-
 ## Install
 
 `pip install git+https://github.com/HawkClaws/oyama.git ollama`
@@ -39,3 +38,8 @@ print(response['message']['content'])
 ## ollama model name
 model_name = oyama.run("llama3")
 ```
+
+## Get model link
+<div align="center">
+ <img alt="get_mopdel_link" src="https://raw.githubusercontent.com/HawkClaws/oyama/main/get_model_link.jpg">
+</div>
