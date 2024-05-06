@@ -1,5 +1,5 @@
 <div align="center">
- <img alt="ollama" height="200px" src="https://raw.githubusercontent.com/HawkClaws/oyama/main/icon.jpg">
+ <img alt="oyama" height="200px" src="https://raw.githubusercontent.com/HawkClaws/oyama/main/icon.jpg">
 </div>
 
 # Oyama
