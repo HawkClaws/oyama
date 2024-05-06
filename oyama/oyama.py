@@ -12,7 +12,7 @@ class CommandRunner:
         self.is_async = is_async
 
     def run(self):
-        # print(self.command)
+        print(f"command:={self.command}")
 
         def target():
             process = subprocess.Popen(
@@ -21,7 +21,11 @@ class CommandRunner:
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
             )
-            output, _ = process.communicate()
+            output, error = process.communicate()
+            if output:
+                print("Output:", str(output.strip(), "utf-8"))
+            if error:
+                print("Error:", str(error.strip(), "utf-8"))
             if output:
                 print(str(output.strip(), "utf-8"))
             rc = process.returncode
@@ -126,12 +130,13 @@ def run(model_url: str) -> str:
         CommandRunner("curl -fsSL https://ollama.com/install.sh | sh").run()
         pass
     
-    try:
-        if ServerChecker("127.0.0.1", 11434).check():
-            print("Server is ready.")
-    except:
-        CommandRunner("ollama serve", is_async=True).run()
-        ServerChecker("127.0.0.1", 11434).wait_for_server()
+
+    if ServerChecker("127.0.0.1", 11434).check() == True:
+        print("Server is ready.")
+      
+    else:
+      CommandRunner("ollama serve", is_async=True).run()
+      ServerChecker("127.0.0.1", 11434).wait_for_server()
 
     try:
         CommandRunner(f"ollama pull {model_url}").run()
