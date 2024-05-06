@@ -116,7 +116,7 @@ class OllamaCommandsRunner:
         self.model_name = model_name
 
     def run(self):
-
+        print("creating model layer transferring model data...")
         CommandRunner(
             f"ollama create {self.model_name} -f {self.model_name}_Modelfile"
         ).run()
