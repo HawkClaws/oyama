@@ -41,17 +41,23 @@ class ServerChecker:
     def __init__(self, address, port):
         self.address = address
         self.port = port
+        self.url = f"http://{self.address}:{self.port}"
+
+    def _send_request(self):
+        try:
+            return requests.get(self.url)
+        except requests.exceptions.ConnectionError:
+            return None
+
+    def check(self):
+        response = self._send_request()
+        return response is not None and response.status_code == 200
 
     def wait_for_server(self):
-        while True:
-            try:
-                response = requests.get(f"http://{self.address}:{self.port}")
-                if response.status_code == 200:
-                    print("Server is ready.")
-                    break
-            except requests.exceptions.ConnectionError:
-                print("Server is not ready yet. Retrying...")
-                time.sleep(1)
+        while not self.check():
+            print("Server is not ready yet. Retrying...")
+            time.sleep(1)
+        print("Server is ready.")
 
 
 class FileDownloader:
@@ -119,9 +125,13 @@ def run(model_url: str) -> str:
     except:
         CommandRunner("curl -fsSL https://ollama.com/install.sh | sh").run()
         pass
-
-    CommandRunner("ollama serve", is_async=True).run()
-    ServerChecker("127.0.0.1", 11434).wait_for_server()
+    
+    try:
+        if ServerChecker("127.0.0.1", 11434).check():
+            print("Server is ready.")
+    except:
+        CommandRunner("ollama serve", is_async=True).run()
+        ServerChecker("127.0.0.1", 11434).wait_for_server()
 
     try:
         CommandRunner(f"ollama pull {model_url}").run()

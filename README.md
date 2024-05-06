@@ -16,12 +16,13 @@ It will not work on Windows or Mac...
 `pip install git+https://github.com/HawkClaws/oyama.git ollama`
 
 ## Code
+
 ```python
 from oyama import oyama
 import ollama
 
 # Hugging Face Model Path
-model_name = oyama.run("https://huggingface.co/mmnga/cyberagent-calm2-7b-chat-gguf/resolve/main/cyberagent-calm2-7b-chat-q4_0.gguf?download=true")
+model_name = oyama.run("https://huggingface.co/mmnga/cyberagent-calm2-7b-chat-gguf/resolve/main/cyberagent-calm2-7b-chat-q8_0.gguf?download=true")
 
 response = ollama.chat(model=model_name, messages=[
   {
@@ -32,3 +33,9 @@ response = ollama.chat(model=model_name, messages=[
 print(response['message']['content'])
 ```
 
+## Other examples
+
+```python
+## ollama model name
+model_name = oyama.run("llama3")
+```
