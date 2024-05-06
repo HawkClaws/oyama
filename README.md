@@ -4,9 +4,9 @@
 
 # Oyama
 
-An improved wrapper for ollama that allows for one-shot launching of local models with URL specification.
-It runs on Linux and GoogleColab.
-It will not work on Windows or Mac...
+An improved wrapper for ollama that allows for one-shot launching of local models with URL specification.  
+It runs on Linux and GoogleColab.  
+It will not work on Windows or Mac...  
 
 # How to use
 
