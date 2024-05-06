@@ -58,11 +58,19 @@ class FileDownloader:
     def __init__(self, url: str):
         self.url = url
 
-    def download(self):
+    def download(self):  # フォルダ名を指定
+        folder_name = "model"
+        # フォルダが存在しない場合、作成する
+        if not os.path.exists(folder_name):
+            os.makedirs(folder_name)
+
         filename = self.url.split("/")[-1].split("?")[0]
-        if os.path.exists(filename):
-            print(f"{filename} already exists. Skipping download.")
-            return filename
+        file_path = os.path.join(folder_name, filename)  # ファイルパスを作成
+
+        if os.path.exists(file_path):  # ファイルが既に存在する場合はダウンロードしない
+            print(f"{file_path} already exists. Skipping download.")
+            return file_path
+
         response = requests.get(self.url, stream=True)
 
         file_size = int(response.headers.get("Content-Length", 0))
@@ -75,12 +83,12 @@ class FileDownloader:
             unit_divisor=1024,
         )
 
-        with open(filename, "wb") as file:
+        with open(file_path, "wb") as file:
             for data in progress.iterable:
                 file.write(data)
                 progress.update(len(data))
 
-        return filename
+        return file_path
 
 
 class FileWriter:
