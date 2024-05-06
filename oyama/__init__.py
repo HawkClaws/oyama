@@ -1,0 +1,1 @@
+from oyama.oyama import *
