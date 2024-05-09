@@ -149,7 +149,7 @@ def run(model_url: str, modelfile: str = "") -> str:
     filename = FileDownloader(model_url).download()
 
     modelfile = f"FROM ./{filename}\n{modelfile}"
-    print("Modelfile:" + modelfile)
+    print("Modelfile:\n" + modelfile)
 
     FileWriter(f"{model_name}_Modelfile", modelfile).write()
 
