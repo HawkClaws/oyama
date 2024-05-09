@@ -123,7 +123,7 @@ class OllamaCommandsRunner:
         CommandRunner(f"ollama run {self.model_name}").run()
 
 
-def run(model_url: str) -> str:
+def run(model_url: str, modelfile: str = "") -> str:
     try:
         CommandRunner(f"ollama --version").run()
     except:
@@ -148,7 +148,10 @@ def run(model_url: str) -> str:
     model_name = model_url.split("/")[-1].split("?")[0].split(".")[0]
     filename = FileDownloader(model_url).download()
 
-    FileWriter(f"{model_name}_Modelfile", f"FROM ./{filename}").write()
+    modelfile = f"FROM ./{filename}\n{modelfile}"
+    print("Modelfile:" + modelfile)
+
+    FileWriter(f"{model_name}_Modelfile", modelfile).write()
 
     OllamaCommandsRunner(model_name).run()
     print("Enable Model:" + model_name)
