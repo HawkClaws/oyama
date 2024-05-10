@@ -8,6 +8,8 @@ An improved wrapper for ollama that allows for one-shot launching of local model
 It runs on Linux and GoogleColab.  
 It will not work on Windows or Mac...  
 
+<a href="https://colab.research.google.com/github/HawkClaws/oyama/blob/main/oyama.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 # How to use
 
 ## Install
