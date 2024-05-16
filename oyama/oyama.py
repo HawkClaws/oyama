@@ -123,20 +123,19 @@ class OllamaCommandsRunner:
         CommandRunner(f"ollama run {self.model_name}").run()
 
 
-def run(model_url: str, modelfile: str = "") -> str:
+def run(model_url: str = None, modal_path: str = None, modelfile: str = "") -> str:
     try:
         CommandRunner(f"ollama --version").run()
     except:
         CommandRunner("curl -fsSL https://ollama.com/install.sh | sh").run()
         pass
-    
 
     if ServerChecker("127.0.0.1", 11434).check() == True:
         print("Server is ready.")
-      
+
     else:
-      CommandRunner("ollama serve", is_async=True).run()
-      ServerChecker("127.0.0.1", 11434).wait_for_server()
+        CommandRunner("ollama serve", is_async=True).run()
+        ServerChecker("127.0.0.1", 11434).wait_for_server()
 
     try:
         CommandRunner(f"ollama pull {model_url}").run()
@@ -145,10 +144,16 @@ def run(model_url: str, modelfile: str = "") -> str:
     except:
         pass
 
-    model_name = model_url.split("/")[-1].split("?")[0].split(".")[0]
-    filename = FileDownloader(model_url).download()
-
-    modelfile = f"FROM ./{filename}\n{modelfile}"
+    
+    
+    if model_url is not None:
+        model_name = model_url.split("/")[-1].split("?")[0].split(".")[0]
+        filename = FileDownloader(model_url).download()
+        modal_path = f"./{filename}"
+    else:
+        model_name = modal_path.split("/")[-1].split("?")[0].split(".")[0]
+        
+    modelfile = f"FROM {modal_path}\n{modelfile}"
     print("Modelfile:\n" + modelfile)
 
     FileWriter(f"{model_name}_Modelfile", modelfile).write()

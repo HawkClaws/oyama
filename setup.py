@@ -9,7 +9,9 @@ setup(
     name="oyama",
     version="0.0.1",
     author="HawkClaws",
-    packages=find_packages(),
+    packages=find_packages(
+        "tqdm",
+    ),
     python_requires=">=3.6",
     include_package_data=True,
     url="https://github.com/HawkClaws/oyama",
