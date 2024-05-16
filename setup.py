@@ -9,15 +9,16 @@ setup(
     name="oyama",
     version="0.0.1",
     author="HawkClaws",
-    packages=find_packages(
-        "tqdm",
-    ),
+    packages=find_packages(),
     python_requires=">=3.6",
     include_package_data=True,
     url="https://github.com/HawkClaws/oyama",
     project_urls={"Source Code": "https://github.com/HawkClaws/oyama"},
     description=DESCRIPTION,
     long_description=readme,
-    long_description_content_type='text/markdown',
+    long_description_content_type="text/markdown",
     license="Apache License 2.0",
+    install_requires=[
+        "tqdm",
+    ],
 )
