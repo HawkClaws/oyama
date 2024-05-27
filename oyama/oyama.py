@@ -149,11 +149,11 @@ def run(model_url: str = None, model_path: str = None, modelfile: str = "") -> s
     if model_url is not None:
         model_name = model_url.split("/")[-1].split("?")[0].split(".")[0]
         filename = FileDownloader(model_url).download()
-        modal_path = f"./{filename}"
+        model_path = f"./{filename}"
     else:
-        model_name = modal_path.split("/")[-1].split("?")[0].split(".")[0]
+        model_name = model_path.split("/")[-1].split("?")[0].split(".")[0]
         
-    modelfile = f"FROM {modal_path}\n{modelfile}"
+    modelfile = f"FROM {model_path}\n{modelfile}"
     print("Modelfile:\n" + modelfile)
 
     FileWriter(f"{model_name}_Modelfile", modelfile).write()
