@@ -123,7 +123,7 @@ class OllamaCommandsRunner:
         CommandRunner(f"ollama run {self.model_name}").run()
 
 
-def run(model_url: str = None, modal_path: str = None, modelfile: str = "") -> str:
+def run(model_url: str = None, model_path: str = None, modelfile: str = "") -> str:
     try:
         CommandRunner(f"ollama --version").run()
     except:
